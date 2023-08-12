@@ -1,22 +1,21 @@
 const cors = require('cors')
 const app = require('express')()
 const server = require('http').createServer(app)
-const io = require('socket.io')(server, {cors : {origin : 'https://telegram-chess.vercel.app'}})
+const io = require('socket.io')(server, {cors : {origin : process.env.FRONTEND_URL}})
 const initClient = require('./gameLogic')
 
 const PORT = process.env.PORT && 5000
 
 app.use(cors({
-    origin: 'https://telegram-chess.vercel.app'
+    origin: process.env.FRONTEND_URL
 }))
 
 app.get('/', (req, res) => {
-    console.log('something')
     res.json('Server work')
 })
 
 server.listen(PORT, () => {
-    console.log('Server started on PORT:' + PORT)
+    console.log('Server started on PORT: ' + PORT)
 })
 
 
