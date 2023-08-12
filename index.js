@@ -1,4 +1,3 @@
-require('dotenv').config()
 const cors = require('cors')
 const app = require('express')()
 const server = require('http').createServer(app)
