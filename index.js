@@ -3,6 +3,7 @@ const app = require('express')()
 const server = require('http').createServer(app)
 const io = require('socket.io')(server, {cors : {origin : process.env.FRONTEND_URL}})
 const initClient = require('./gameLogic')
+require('./telegramBot')()
 
 const PORT = process.env.PORT && 5000
 
