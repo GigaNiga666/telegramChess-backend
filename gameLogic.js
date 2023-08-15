@@ -13,7 +13,7 @@ function initClient(socket, webSocket) {
     socket.on('disconnect', disconnect)
 }
 
-function initGame(sessionId) {
+function initGame(sessionId, username) {
     const room = io.sockets.adapter.rooms.get(sessionId)
 
     if (room === undefined) {
@@ -23,7 +23,7 @@ function initGame(sessionId) {
     else if (room.size < 2) {
         this.join(sessionId)
         sessions[this.id] = sessionId
-        this.broadcast.to(sessionId).emit('newPlayerJoin', 'Новый игрок присоединился')
+        this.broadcast.to(sessionId).emit('newPlayerJoin', username)
 
         const playerOneColor = colorRandom()
         const playerTwoColor = playerOneColor === 'white' ? 'black' : 'white'
