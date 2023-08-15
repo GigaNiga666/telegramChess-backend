@@ -2,18 +2,10 @@ const TelegramApi = require('node-telegram-bot-api')
 
 let bot;
 
-async function initTelegramBot() {
-    bot = new TelegramApi(process.env.TOKEN)
-
-    if(bot.isPolling()) {
-        await bot.stopPolling();
-    }
-
-    await bot.startPolling();
+function initTelegramBot() {
+    bot = new TelegramApi(process.env.TOKEN, {polling:true})
 
     bot.on('message', handleMessageText)
-
-    await bot.stopPolling();
 }
 
 async function handleMessageText(msg) {
