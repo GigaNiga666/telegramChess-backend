@@ -9,6 +9,7 @@ function initTelegramBot() {
     bot.on('callback', handleCallback)
 }
 async function handleCallback(callback) {
+    console.log(callback)
     const chatId = callback.user.chat.id
 
     if (callback.data === 'connectToRoom') {
