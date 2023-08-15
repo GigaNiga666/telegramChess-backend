@@ -3,7 +3,7 @@ const TelegramApi = require('node-telegram-bot-api')
 let bot;
 
 function initTelegramBot() {
-    bot = new TelegramApi('1544557968:AAETBL7C0TGZ3Wewu8gVMh3kn_dmmBO9iDA', {polling : true})
+    bot = new TelegramApi(process.env.TOKEN, {polling : true})
 
     bot.on('message', handleMessageText)
 }
