@@ -15,7 +15,7 @@ async function handleMessageText(msg) {
     if (msgText === '/start') {
         await bot.sendMessage(chatId, 'Здоровей будешь!', {
             reply_markup: {
-                keyboard: [
+                inline_keyboard: [
                     [{text: 'Chess', web_app: {url: 'https://telegram-chess.vercel.app'}}]
                 ]
             }
