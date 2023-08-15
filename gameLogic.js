@@ -41,8 +41,6 @@ function initGame(sessionId) {
 }
 
 function newMove(coordinates) {
-    console.log(this.id)
-    console.log(sessions)
     io.to(sessions[this.id]).emit('newMove', coordinates)
 }
 
