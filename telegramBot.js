@@ -12,8 +12,9 @@ async function handleMessageText(msg) {
     const msgText = msg.text
     const chatId = msg.chat.id
 
+    console.log(msg)
+
     if (msgText === '/start') {
-        await bot.sendMessage(chatId, `${msg.user.username}`)
         await bot.sendMessage(chatId, 'Здоровей будешь!', {
             reply_markup: {
                 inline_keyboard: [
