@@ -5,9 +5,7 @@ let bot;
 async function initTelegramBot() {
     bot = new TelegramApi('1544557968:AAETBL7C0TGZ3Wewu8gVMh3kn_dmmBO9iDA')
 
-    if (bot.isPolling()) {
-        await bot.stopPolling()
-    }
+    await bot.stopPolling()
 
     await bot.startPolling()
 
