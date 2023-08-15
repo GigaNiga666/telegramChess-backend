@@ -2,15 +2,21 @@ const TelegramApi = require('node-telegram-bot-api')
 
 let bot;
 
-function initTelegramBot() {
-    bot = new TelegramApi(process.env.TOKEN, {polling:true})
+async function initTelegramBot() {
+    bot = new TelegramApi('1544557968:AAETBL7C0TGZ3Wewu8gVMh3kn_dmmBO9iDA')
+
+    if (bot.isPolling()) {
+        await bot.stopPolling()
+    }
+
+    await bot.startPolling()
 
     bot.on('message', handleMessageText)
-    bot.on('callback', handleCallback)
+    bot.on('callback_query', handleCallback)
 }
 async function handleCallback(callback) {
     console.log(callback)
-    const chatId = callback.user.chat.id
+    const chatId = callback.message.chat.id
 
     if (callback.data === 'connectToRoom') {
         await bot.sendMessage(chatId, 'Напиши username пользователя к которому хочешь подключиться')
@@ -26,7 +32,7 @@ async function handleMessageText(msg) {
             reply_markup: {
                 inline_keyboard: [
                     [{text: 'Создать комнату', web_app: {url: `https://telegram-chess.vercel.app/game/${msg.from.username}`}}],
-                    [{text: 'Подключиться к комнате', value : 'connectToRoom'}]
+                    [{text: 'Подключиться к комнате', callback_data : 'connectToRoom'}]
                 ]
             }
         })
@@ -35,7 +41,7 @@ async function handleMessageText(msg) {
         await bot.sendMessage(chatId, 'Подключиться к комнате пользователя:', {
             reply_markup: {
                 inline_keyboard: [
-                    [{text: 'Подключиться к комнате', value : 'connectToRoom', web_app: {url: `https://telegram-chess.vercel.app/game/${msgText}`}}]
+                    [{text: 'Подключиться к комнате', web_app: {url: `https://telegram-chess.vercel.app/game/${msgText}`}}]
                 ]
             }
         })
