@@ -25,7 +25,7 @@ async function handleMessageText(msg) {
             reply_markup: {
                 inline_keyboard: [
                     [{text: 'Создать комнату', web_app: {url: `https://telegram-chess.vercel.app/game/${msg.from.username}`}}],
-                    [{text: 'Подключиться к комнате', value : 'connectToRoom', web_app: {url: `https://telegram-chess.vercel.app/game/${msg.from.username}`}}]
+                    [{text: 'Подключиться к комнате', value : 'connectToRoom'}]
                 ]
             }
         })
