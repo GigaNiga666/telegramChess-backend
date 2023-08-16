@@ -11,8 +11,16 @@ async function initTelegramBot() {
 
     bot.on('message', handleMessageText)
     bot.on('callback_query', handleCallback)
-
-    return bot
+}
+async function answerWebAppQueryHandler(queryId, winnerName) {
+    await bot.answerWebAppQuery(queryId, {
+        type:'article',
+        id: queryId,
+        title: 'Результаты игры',
+        input_message_content: {
+            message_text: `Выиграл игрок: ${winnerName}`
+        }
+    })
 }
 async function handleCallback(callback) {
     const chatId = callback.message.chat.id
@@ -46,4 +54,4 @@ async function handleMessageText(msg) {
     }
 }
 
-module.exports = initTelegramBot
+module.exports = {initTelegramBot, answerWebAppQueryHandler}

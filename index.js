@@ -4,7 +4,8 @@ const app = express()
 const server = require('http').createServer(app)
 const io = require('socket.io')(server, {cors : {origin : process.env.FRONTEND_URL}})
 const initClient = require('./gameLogic')
-const bot = require('./telegramBot')()
+require('./telegramBot').initTelegramBot()
+const answerWebAppQueryHandler = require('./telegramBot').answerWebAppQueryHandler
 
 const PORT = process.env.PORT && 5000
 
@@ -21,24 +22,9 @@ app.post('/web-data', async (req, res) => {
     const {winnerName, queryId} = req.body
 
     try {
-        await bot.answerWebAppQuery(queryId, {
-            type:'article',
-            id: queryId,
-            title: 'Результаты игры',
-            input_message_content: {
-                message_text: `Выиграл игрок: ${winnerName}`
-            }
-        })
+        await answerWebAppQueryHandler(queryId, winnerName)
         return res.status(200).json({})
     } catch (e) {
-        await bot.answerWebAppQuery(queryId, {
-            type:'article',
-            id: queryId,
-            title: 'Что-то пошло не так',
-            input_message_content: {
-                message_text: `Что-то пошло не так`
-            }
-        })
         return res.status(500).json({})
     }
 })
