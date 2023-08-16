@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 
 app.post('/web-data', async (req, res) => {
     console.log('fgfgfgfgfg-------------')
-    console.log(req)
+    console.log(req.body)
 
     return res.status(200).json({})
 
