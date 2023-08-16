@@ -11,6 +11,8 @@ async function initTelegramBot() {
 
     bot.on('message', handleMessageText)
     bot.on('callback_query', handleCallback)
+
+    return bot
 }
 async function handleCallback(callback) {
     const chatId = callback.message.chat.id
@@ -19,7 +21,6 @@ async function handleCallback(callback) {
         await bot.sendMessage(chatId, 'Напиши username пользователя к которому хочешь подключиться')
     }
 }
-
 async function handleMessageText(msg) {
     const msgText = msg.text
     const chatId = msg.chat.id
