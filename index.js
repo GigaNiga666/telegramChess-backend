@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
     res.json('Server work')
 })
 
-app.post('/game/:id', (req, res) => {
+app.post('/', (req, res) => {
     const {winnerName, queryId} = req.body
 
     try {
