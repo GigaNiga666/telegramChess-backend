@@ -15,12 +15,13 @@ app.get('/', (req, res) => {
     res.json('Server work')
 })
 
-app.post('/', (req, res) => {
+app.post('/web-data', async (req, res) => {
     const {winnerName, queryId} = req.body
+    console.log('fgfgfgfgfg-------------')
     console.log(winnerName, queryId)
 
     try {
-        bot.answerWebAppQuery(queryId, {
+        await bot.answerWebAppQuery(queryId, {
             type:'article',
             id: queryId,
             title: 'Результаты игры',
@@ -30,7 +31,7 @@ app.post('/', (req, res) => {
         })
         return res.status(200).json({})
     } catch (e) {
-        bot.answerWebAppQuery(queryId, {
+        await bot.answerWebAppQuery(queryId, {
             type:'article',
             id: queryId,
             title: 'Что-то пошло не так',
