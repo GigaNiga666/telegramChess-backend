@@ -16,31 +16,32 @@ app.get('/', (req, res) => {
 })
 
 app.post('/web-data', async (req, res) => {
-    const {winnerName, queryId} = req.body
     console.log('fgfgfgfgfg-------------')
-    console.log(winnerName, queryId)
+    console.log(req.body)
 
-    try {
-        await bot.answerWebAppQuery(queryId, {
-            type:'article',
-            id: queryId,
-            title: 'Результаты игры',
-            input_message_content: {
-                message_text: `Выиграл игрок: ${winnerName}`
-            }
-        })
-        return res.status(200).json({})
-    } catch (e) {
-        await bot.answerWebAppQuery(queryId, {
-            type:'article',
-            id: queryId,
-            title: 'Что-то пошло не так',
-            input_message_content: {
-                message_text: `Что-то пошло не так`
-            }
-        })
-        return res.status(500).json({})
-    }
+    return res.status(200).json({})
+
+    // try {
+    //     await bot.answerWebAppQuery(queryId, {
+    //         type:'article',
+    //         id: queryId,
+    //         title: 'Результаты игры',
+    //         input_message_content: {
+    //             message_text: `Выиграл игрок: ${winnerName}`
+    //         }
+    //     })
+    //     return res.status(200).json({})
+    // } catch (e) {
+    //     await bot.answerWebAppQuery(queryId, {
+    //         type:'article',
+    //         id: queryId,
+    //         title: 'Что-то пошло не так',
+    //         input_message_content: {
+    //             message_text: `Что-то пошло не так`
+    //         }
+    //     })
+    //     return res.status(500).json({})
+    // }
 })
 
 server.listen(PORT, () => {
