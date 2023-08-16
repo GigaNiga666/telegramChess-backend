@@ -17,6 +17,7 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
     const {winnerName, queryId} = req.body
+    console.log(winnerName, queryId)
 
     try {
         bot.answerWebAppQuery(queryId, {
