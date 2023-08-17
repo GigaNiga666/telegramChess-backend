@@ -20,7 +20,6 @@ app.get('/', (req, res) => {
 
 app.post('/web-data', async (req, res) => {
     const {winnerName, queryId} = req.body
-
     try {
         await answerWebAppQueryHandler(queryId, winnerName)
         return res.status(200).json({})
