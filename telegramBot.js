@@ -12,13 +12,13 @@ async function initTelegramBot() {
     bot.on('message', handleMessageText)
     bot.on('callback_query', handleCallback)
 }
-async function answerWebAppQueryHandler(queryId, winnerName) {
+async function answerWebAppQueryHandler(queryId, isWin) {
     await bot.answerWebAppQuery(queryId, {
         type:'article',
         id: queryId,
         title: 'Результаты игры',
         input_message_content: {
-            message_text: `Выиграл игрок: ${winnerName}`
+            message_text: isWin ? 'Вы выиграли!' : 'Вы проиграли'
         }
     })
 }
