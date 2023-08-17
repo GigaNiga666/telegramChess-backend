@@ -13,6 +13,7 @@ async function initTelegramBot() {
     bot.on('callback_query', handleCallback)
 }
 async function answerWebAppQueryHandler(queryId, isWin) {
+    console.log('sog', isWin)
     await bot.answerWebAppQuery(queryId, {
         type:'article',
         id: queryId,
