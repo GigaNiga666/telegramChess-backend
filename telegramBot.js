@@ -43,15 +43,21 @@ async function handleMessageText(msg) {
                 ]
             }
         })
+        return
     }
-    else {
-        await bot.sendMessage(chatId, 'Подключиться к комнате пользователя:', {
+    else if (msgText.startsWith('@')) {
+        await bot.sendMessage(chatId, `Подключиться к комнате пользователя: ${msgText.slice(0)}`, {
             reply_markup: {
                 inline_keyboard: [
-                    [{text: 'Подключиться к комнате', web_app: {url: `https://telegram-chess.vercel.app/game/${msgText}`}}]
+                    [{text: 'Подключиться к комнате', web_app: {url: `https://telegram-chess.vercel.app/game/${msgText.slice(0)}`}}]
                 ]
             }
         })
+        return
+    }
+    else {
+        await bot.sendMessage(chatId, 'Ой, я такого не знаю(')
+        return
     }
 }
 
