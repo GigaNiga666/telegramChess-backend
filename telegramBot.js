@@ -55,10 +55,6 @@ async function handleMessageText(msg) {
         })
         return
     }
-    else {
-        await bot.sendMessage(chatId, 'Ой, я такого не знаю(')
-        return
-    }
 }
 
 module.exports = {initTelegramBot, answerWebAppQueryHandler}
