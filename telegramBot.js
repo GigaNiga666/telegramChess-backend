@@ -27,7 +27,7 @@ async function handleCallback(callback) {
     const chatId = callback.message.chat.id
 
     if (callback.data === 'connectToRoom') {
-        await bot.sendMessage(chatId, 'Напиши username пользователя к которому хочешь подключиться')
+        await bot.sendMessage(chatId, 'Напиши username пользователя к которому хочешь подключиться (включая @)')
     }
 }
 async function handleMessageText(msg) {
@@ -46,10 +46,10 @@ async function handleMessageText(msg) {
         return
     }
     else if (msgText.startsWith('@')) {
-        await bot.sendMessage(chatId, `Подключиться к комнате пользователя: ${msgText.slice(0)}`, {
+        await bot.sendMessage(chatId, `Подключиться к комнате пользователя: ${msgText.slice(1)}`, {
             reply_markup: {
                 inline_keyboard: [
-                    [{text: 'Подключиться к комнате', web_app: {url: `https://telegram-chess.vercel.app/game/${msgText.slice(0)}`}}]
+                    [{text: 'Подключиться к комнате', web_app: {url: `https://telegram-chess.vercel.app/game/${msgText.slice(1)}`}}]
                 ]
             }
         })
