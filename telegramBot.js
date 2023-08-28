@@ -28,6 +28,20 @@ async function handleCallback(callback) {
 
     if (callback.data === 'connectToRoom') {
         await bot.sendMessage(chatId, 'Напиши username пользователя к которому хочешь подключиться (включая @)')
+        bot.onText(/[а-яА-я0-9]/, async (msg) => {
+            const msgText = msg.text
+            const chatId = msg.chat.id
+
+            await bot.sendMessage(chatId, `Подключиться к комнате пользователя: ${msgText.match(/\w/g).join('')}`, {
+                reply_markup: {
+                    inline_keyboard: [
+                        [{text: 'Подключиться к комнате', web_app: {url: `https://telegram-chess.vercel.app/game/${msgText.match(/\w/g).join('')}`}}]
+                    ]
+                }
+            })
+            return
+        })
+        return
     }
 }
 async function handleMessageText(msg) {
@@ -45,14 +59,8 @@ async function handleMessageText(msg) {
         })
         return
     }
-    else if (msgText.startsWith('@')) {
-        await bot.sendMessage(chatId, `Подключиться к комнате пользователя: ${msgText.match(/\w/g).join('')}`, {
-            reply_markup: {
-                inline_keyboard: [
-                    [{text: 'Подключиться к комнате', web_app: {url: `https://telegram-chess.vercel.app/game/${msgText.match(/\w/g).join('')}`}}]
-                ]
-            }
-        })
+    else {
+        await bot.sendMessage(chatId, 'Я такого не знаю')
         return
     }
 }
